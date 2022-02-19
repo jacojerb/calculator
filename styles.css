@@ -1,0 +1,101 @@
+.calculatorBody {
+    height: 80%;
+    width: 35%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    outline-style: solid;
+    outline-width: thick;
+    outline-color: black;
+}
+
+.aboveDisplay {
+    height: 10%;
+    width: 100%;
+}
+
+.digit {
+    
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 13px;
+    width:100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.display {
+    height: 17%;
+    width: 90%;
+    outline-style: solid;
+    outline-width: thick;
+    outline-color: black;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.numbers {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.dots {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.dot {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 3px;
+}
+
+.dotInDot {
+    height: 80%;
+    width: 16%;
+}
+
+.buttons {
+    height: 76%;
+    width: 100%;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.displayA, .displayD, .displayG {
+    height: 10%;
+    width: 85%;
+}
+
+.displayDiv {
+    height: 35%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.displayB, .displayC, .displayE, .displayF {
+    height: 115%;
+    width: 20%; 
+}
+
+
+
+
