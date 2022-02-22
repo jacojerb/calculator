@@ -450,12 +450,7 @@ buttonClear.addEventListener("click", function() {
 
 buttonPlus.addEventListener("click", function() {equasionButtonPress("sum")})
 
-buttonMinus.addEventListener("click", function() {if  (currentNumber === "") {
-    currentNumber += "-"; 
-    printNumber(currentNumber);
-    selector = "sum"
-}else {
-    equasionButtonPress("subtract") } })
+buttonMinus.addEventListener("click", function() {equasionButtonPress("subtract") } )
 
 
 buttonMultiply.addEventListener("click", function() {equasionButtonPress("multiply")})
