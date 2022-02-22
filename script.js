@@ -1,18 +1,26 @@
 //math functions
 
 function sum(a,b) {
+    a = Number(a);
+    b = Number(b);
     return a + b
 }
 
 function subtract(a,b) {
-    return a - b
+    a = Number(a);
+    b = Number(b);
+    return b - a
 }
 
 function divide(a,b) {
-    return a / b
+    a = Number(a);
+    b = Number(b);
+    return b / a
 }
 
 function multiply(a,b) {
+    a = Number(a);
+    b = Number(b);
     return a * b
 }
 
@@ -22,19 +30,63 @@ function multiply(a,b) {
 //calculations
 
 function calculate(a,b,equasion) {
+    let result;
     switch(equasion) {
-        case "sum": return sum(a,b)
-        case "subtract": return subtract(a,b)
-        case "divide": return divide(a,b)
-        case "multiply": return multiply(a,b)
-    }
+        case "sum": result = sum(a,b); break
+        case "subtract": result = subtract(a,b); break;
+        case "divide": result = divide(a,b); break;
+        case "multiply": result = multiply(a,b); break;
+    }   
+     if (result === NaN || result === Infinity) {printError(); 
+        savedNumber = null;
+        currentNumber = "";
+        selector = null;
+        dotPosition = "noDot"; 
+        return }
+    if (result.toString().length > 12) {
+        if (result.toString().includes(".")) {
+            let resultString = result.toString();
+            if (resultString.indexOf(".") > 12) {return result}
+            else {
+                resultString = resultString.slice(0, 13); 
+                result = Number(resultString);
+                return result;
+            } 
+        } else {return result}
+    } else {return result}
 }
-let savedNumber = 10
-let currentNumber = "-1"
+
+
+let savedNumber = 0
+let currentNumber = ""
 let selector = "multiply"
 let dotPosition = "noDot"
 
-console.log(calculate(savedNumber,currentNumber,selector))
+
+let equasionButtonPress = function(operator) {
+    if (currentNumber === "-") {return}
+    if (currentNumber === "") {
+        if (savedNumber) {
+            selector = operator
+        } 
+    } else {
+        if (savedNumber) { 
+            let result = calculate(currentNumber, savedNumber, selector);
+            if (result === undefined) {
+                printError(); return
+            }
+            printNumber(result.toString());
+            savedNumber = result;
+            currentNumber = "";
+            selector = operator;
+        } else {
+            console.log(currentNumber)
+            savedNumber = currentNumber;
+            currentNumber = "";
+            selector = operator;
+        }
+    }
+}
 
 
 
@@ -271,6 +323,7 @@ function printNumber(num) {
 
 
 function printError() {
+    clearAll();
     writeR(digit1)
     writeO(digit2)
     writeR(digit3)
@@ -326,6 +379,13 @@ const button8 = document.querySelector(".button8")
 const button9 = document.querySelector(".button9")
 const button0 = document.querySelector(".button0")
 const buttonDot = document.querySelector(".buttonDot")
+const buttonBackspace = document.querySelector(".buttonBackspace")
+const buttonClear = document.querySelector(".buttonClear")
+const buttonPlus = document.querySelector(".buttonPlus")
+const buttonMinus = document.querySelector(".buttonMinus")
+const buttonMultiply = document.querySelector(".buttonTimes")
+const buttonDivide = document.querySelector(".buttonDivide")
+const buttonEquals = document.querySelector(".buttonEquals")
 
 button1.addEventListener("click", function() {
     currentNumber += "1";
@@ -373,3 +433,33 @@ buttonDot.addEventListener("click", function() {
         currentNumber += "."
     } printNumber(currentNumber)
 })
+
+buttonBackspace.addEventListener("click", function () {
+    if (currentNumber) {
+        currentNumber = currentNumber.slice(0, currentNumber.length - 1)
+        printNumber(currentNumber)
+    }
+})
+
+buttonClear.addEventListener("click", function() {
+    clearAll();
+    savedNumber = null
+    currentNumber = ""
+    dotPosition = "noDot"
+})
+
+buttonPlus.addEventListener("click", function() {equasionButtonPress("sum")})
+
+buttonMinus.addEventListener("click", function() {if  (currentNumber === "") {
+    currentNumber += "-"; 
+    printNumber(currentNumber);
+    selector = "sum"
+}else {
+    equasionButtonPress("subtract") } })
+
+
+buttonMultiply.addEventListener("click", function() {equasionButtonPress("multiply")})
+
+buttonDivide.addEventListener("click", function() {equasionButtonPress("divide")})
+
+buttonEquals.addEventListener("click", function() {equasionButtonPress(selector)})
